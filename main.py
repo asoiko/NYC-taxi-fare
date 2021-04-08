@@ -6,8 +6,8 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 # read data
-train = pd.read_csv('data\\train.csv', nrows=2_000_000)
-test = pd.read_csv('data\\test.csv')
+train = pd.read_csv('data/train.csv', nrows=1_000_000)
+test = pd.read_csv('data/test.csv')
 
 
 # add new feature absolute diff coordinate
@@ -112,8 +112,8 @@ pred_lgbm_submit = model.predict(test[features], num_iteration=model.best_iterat
 submit = pd.DataFrame({
     "key": test.key,
     "fare_amount": pred_lgbm_submit.round(2)}, columns=['key', 'fare_amount'])
-submit.to_csv('data\\sample_submission.csv', index=False)
+submit.to_csv('data/sample_submission.csv', index=False)
 
 # save model
-pickle_out = open('models\\lgbm_reg.pickle', 'wb')
+pickle_out = open('models/lgbm_reg.pickle', 'wb')
 pickle.dump(model, pickle_out)
